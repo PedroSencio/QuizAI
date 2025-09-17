@@ -1,0 +1,235 @@
+.choice-box {
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: transparent;
+    border: 1.5px solid #888;
+    transition: background 0.2s, border 0.2s, color 0.2s;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.choice-box.selected {
+    background-color: #4caf50;
+    border: 2px solid #4caf50;
+    color: #fff;
+}
+body, html {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+#root {
+    margin: 0;
+    padding: 0;
+}
+
+#content {
+    background-color: rgb(56, 56, 56);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+#slide {
+    height: 100vh;
+    width: 30vw;
+    background-color: rgb(28, 28, 28);
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+#form {
+    margin-top: 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: white;
+    width: 90%;
+    display: flex;
+}
+
+.input-group p {
+    margin: 0;
+}
+
+.input-group input {
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    background-color: rgb(37, 37, 37);
+    height: 45px;
+}
+
+#grid {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+    gap: 0px;
+    column-gap: 20px;
+}
+
+#grid p {
+    margin: 0;
+}
+
+#grid input {
+    width: 100%;
+    padding: 0;
+    height: 45px;
+    border: 0;
+    border-radius: 5px;
+    background-color: rgb(37, 37, 37);
+
+}
+
+#btn-confirmar {
+    background-color: rgb(39, 112, 5);
+    color: white;
+    margin-top: 50px;
+    height: 40px;
+    width: 60%;
+    transition: all 0.2s ease-in-out;
+}
+
+#btn-confirmar:hover {
+    background-color: rgb(5, 75, 5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+}
+
+#quiz {
+    position: relative;
+    width: 70vw;
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-bottom: 0 !important;
+
+}
+
+.question {
+    background-color: rgb(54, 40, 40);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.questao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 30px;
+    height: auto;
+    padding: 20px;
+    gap: 20px;
+    border-radius: 10px;
+}
+
+.questao h2 {
+    font-size: 30px;
+    font-weight: bold;
+    background-color: rgba(37, 37, 38, 0.758);
+    border-radius: 10px;
+    width: 100%;
+}
+
+.questao p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.choice {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 10px;
+    width: 70%;
+    border: 1px solid gray;
+}
+
+
+.choice input[type="radio"] {
+    display: none;
+}
+
+
+.custom-radio {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: transparent;
+    transition: background 0.2s, border 0.2s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.choice input[type="radio"]:checked + .custom-radio {
+    background-color: #4caf50;
+    border: 2px solid #4caf50;
+    color: #fff;
+}
+
+.disabled {
+    display: none;
+    cursor: not-allowed;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
