@@ -17,7 +17,7 @@ function Home() {
         event.preventDefault();
         setCarregando(true);
         try {
-            const response = await fetch('hhttps://quizai-backend-ulgj.onrender.com/gerar_quiz', {
+            const response = await fetch('https://quizai-backend-ulgj.onrender.com/gerar_quiz', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
