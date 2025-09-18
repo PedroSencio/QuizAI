@@ -3,6 +3,7 @@ import './Home.css'
 import { useEffect } from 'react'
 
 function Home() {
+    const [isMobile, setIsMobile] = React.useState(false);
     const [tarefa, setTarefa] = React.useState([]);
     const [selecionadas, setSelecionadas] = React.useState({});
     const [resultado, setResultado] = React.useState(null);
@@ -12,6 +13,15 @@ function Home() {
     const [tipos_permitidos, setTipos_permitidos] = React.useState(["Multipla Escolha", "Verdadeiro ou Falso"]);
     const [idioma, setIdioma] = React.useState("Portugues");
     const [carregando, setCarregando] = React.useState(false);
+
+    React.useEffect(() => {
+        function handleResize() {
+            setIsMobile(window.innerWidth <= 768);
+        }
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     async function handleChangeAssunto(event) {
         event.preventDefault();
@@ -44,9 +54,91 @@ function Home() {
             console.error('Erro na requisição:', error);
         }
     }
+
+    if (isMobile) {
+        return (
+            <div id='content-mobile'>
+                <div id='box-mobile'>
+                    <h2>Gerador de Quiz com IA</h2>
+                    <div id='form-mobile'>
+                        <p>Assunto:</p>
+                        <input value={assunto} onChange={e => setAssunto(e.target.value)} type="text" />
+                        <p>Dificuldade:</p>
+                        <input value={dificuldade} onChange={e => setDificuldade(e.target.value)} type="text" />
+                        <p>Quantidade de Perguntas:</p>
+                        <input value={quantidade_questoes} onChange={e => setQuantidade_questoes(e.target.value)} type="number" />
+                        <button onClick={(e) => handleChangeAssunto(e)} id='btn-confirmar-mobile'>Gerar</button>
+                    </div>
+                </div>
+                <div id='quiz-mobile'>
+                    {carregando && (
+                        <div id="loading-overlay">
+                            <h2>Carregando Conteúdo</h2>
+                            <div className="spinner"></div>
+                        </div>
+                    )}
+                    {tarefa.map((item, index) => (
+                        <div key={index} className='questao-mobile'>
+                            <h2>Questão: {item.id}</h2>
+                            <p>{item.prompt}</p>
+                            {item.choices.map((choice, cIndex) => (
+                                <div
+                                    key={cIndex}
+                                    className={`choice-box${selecionadas[item.id] === cIndex ? ' selected' : ''}`}
+                                    onClick={() => setSelecionadas(prev => ({ ...prev, [item.id]: cIndex }))}
+                                    style={{ cursor: 'pointer', margin: '8px 0' }}
+                                >
+                                    {choice}
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                    <button className={tarefa.length === 0 ? 'disabled' : 'btn-concluir-mobile'}
+                        onClick={() => {
+                            let acertos = 0;
+                            let erros = 0;
+                            const detalhes = tarefa.map((item) => {
+                                const correta = item.answer_index;
+                                const marcada = selecionadas[item.id];
+                                const acertou = marcada === correta;
+                                if (acertou) acertos++;
+                                else erros++;
+                                return {
+                                    id: item.id,
+                                    acertou,
+                                    correta: item.choices[correta],
+                                    marcada: marcada !== undefined ? item.choices[marcada] : null
+                                };
+                            });
+                            setResultado({ acertos, erros, detalhes });
+                        }}
+                        style={{ marginTop: 24, marginBottom: 32 }}
+                    >Concluir</button>
+                    {resultado && (
+                        <div style={{ marginTop: 32, background: '#222', borderRadius: 8, marginBottom: 32 }}>
+                            <h3>Resultado</h3>
+                            <p>Acertos: {resultado.acertos} | Erros: {resultado.erros}</p>
+                            <ul>
+                                {resultado.detalhes.map((det, i) => (
+                                    <li key={i} style={{ color: det.acertou ? '#4caf50' : '#ff5252' }}>
+                                        Questão {det.id}: {det.acertou ? 'Acertou' : 'Errou'}
+                                        {!det.acertou && (
+                                            <span> (Correta: {det.correta}{det.marcada ? ", Sua: " + det.marcada : ''})</span>
+
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            </div>
+        )
+    }
+
     return (
-        <div id='content'>
-            <div id='slide'>
+            <div id='content'>
+                <div id='slide'>
                 <h1>Gerador de Quiz com IA</h1>
                 <form id='form' action="">
                     <div className='input-group'>

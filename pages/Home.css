@@ -17,10 +17,17 @@
     color: #fff;
 }
 body, html {
-    overflow: hidden;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+}
+
+/* Para telas mobile, permitir scroll vertical */
+@media (max-width: 768px) {
+    body, html {
+        overflow: auto;
+    }
 }
 
 #root {
@@ -100,25 +107,28 @@ body, html {
     border: 0;
     border-radius: 5px;
     background-color: rgb(37, 37, 37);
-
 }
 
 #btn-confirmar {
-    background-color: rgb(39, 112, 5);
-    color: white;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #2e7d32 100%) !important;
+    color: white !important;
     margin-top: 50px;
     height: 40px;
     width: 60%;
-    transition: all 0.2s ease-in-out;
+    border: none !important;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
 #btn-confirmar:hover {
-    background-color: rgb(5, 75, 5);
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, #66BB6A 0%, #4CAF50 50%, #43A047 100%) !important;
+    color: white !important;
     cursor: pointer;
     transform: scale(1.05);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
 }
 
 #quiz {
@@ -233,3 +243,67 @@ body, html {
     flex-direction: column;
     z-index: 9999;
 }
+
+/* MOBILE */
+
+#content-mobile {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+#box-mobile {
+    background-color: rgb(56, 56, 56);
+    border-radius: 12px;
+    margin-top: 120px;
+    width: 90vw;
+    height: 60vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+#form-mobile {
+    margin-top: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#form-mobile p{
+    color: white;
+    margin: 0;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+#form-mobile input {
+    width: 90%;
+    padding: 0;
+    height: 45px;
+    border: 0;
+    border-radius: 5px;
+    background-color: rgb(37, 37, 37);
+    margin-top: 5px;
+    padding: 0;
+    text-align: center;
+}
+
+#btn-confirmar-mobile {
+    background: linear-gradient(45deg, rgb(6, 67, 88) 0%, rgb(78, 19, 76) 100%) !important;
+    color: rgb(255, 255, 255);
+    margin-top: 30px;
+    height: 40px;
+    border: 0;
+    width: 60%;
+    transition: all 0.2s ease-in-out;
+}
+
