@@ -66,7 +66,16 @@ function Home() {
                         <p>Dificuldade:</p>
                         <input value={dificuldade} onChange={e => setDificuldade(e.target.value)} type="text" />
                         <p>Quantidade de Perguntas:</p>
-                        <input value={quantidade_questoes} onChange={e => setQuantidade_questoes(e.target.value)} type="number" />
+                        <input 
+                            value={quantidade_questoes} 
+                            onChange={e => {
+                                const valor = parseInt(e.target.value) || 1;
+                                setQuantidade_questoes(Math.min(15, Math.max(1, valor)));
+                            }} 
+                            type="number" 
+                            min="1"
+                            max="15"
+                        />
                         <button onClick={(e) => handleChangeAssunto(e)} id='btn-confirmar-mobile'>Gerar</button>
                     </div>
                 </div>
@@ -149,7 +158,16 @@ function Home() {
                         <p>Dificuldade</p>
                         <p>Perguntas</p>
                         <input value={dificuldade} onChange={e => setDificuldade(e.target.value)} type="text" />
-                        <input value={quantidade_questoes} onChange={e => setQuantidade_questoes(e.target.value)} type="number" />
+                        <input 
+                            value={quantidade_questoes} 
+                            onChange={e => {
+                                const valor = parseInt(e.target.value) || 1;
+                                setQuantidade_questoes(Math.min(15, Math.max(1, valor)));
+                            }} 
+                            type="number" 
+                            min="1"
+                            max="15"
+                        />
                     </div>
                     <button onClick={(e) => handleChangeAssunto(e)} id='btn-confirmar'>Gerar</button>
                 </form>
