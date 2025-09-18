@@ -86,7 +86,17 @@ function Home() {
                             <div className="spinner"></div>
                         </div>
                     )}
-                    {tarefa.map((item, index) => (
+                    {tarefa.length === 0 && !carregando && (
+                        <div style={{
+                            textAlign: 'center',
+                            padding: '40px 20px',
+                            color: '#666',
+                            fontSize: '18px'
+                        }}>
+                            Seu quiz gerado aparecerá aqui...
+                        </div>
+                    )}
+                    {tarefa.filter(item => item && item.choices && Array.isArray(item.choices)).map((item, index) => (
                         <div key={index} className='questao-mobile'>
                             <h2>Questão: {item.id}</h2>
                             <p>{item.prompt}</p>
@@ -179,7 +189,17 @@ function Home() {
                     <div className="spinner"></div>
                 </div>
             )}
-                {tarefa.map((item, index) => (
+                {tarefa.length === 0 && !carregando && (
+                    <div style={{
+                        textAlign: 'center',
+                        padding: '40px 20px',
+                        color: '#999',
+                        fontSize: '18px'
+                    }}>
+                        Seu quiz gerado aparecerá aqui...
+                    </div>
+                )}
+                {tarefa.filter(item => item && item.choices && Array.isArray(item.choices)).map((item, index) => (
                     <div key={index} className='questao'>
                         <h2>Questão: {item.id}</h2>
                         <p>{item.prompt}</p>
